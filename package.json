@@ -35,7 +35,7 @@
     "tap": "7.1.2"
   },
   "dependencies": {
-    "generic-request-options": "1.1.6",
+    "generic-request-options": "1.1.7",
     "request-as-bluebird": "2.0.2"
   }
 }
