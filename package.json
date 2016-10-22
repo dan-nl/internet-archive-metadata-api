@@ -1,0 +1,41 @@
+{
+  "name": "internet-archive-metadata-api",
+  "version": "0.0.0",
+  "description": "internet archive metadata api helper methods",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "tap ./test/*.test.js ./test/*/*.test.js --reporter spec",
+    "cover:browser": "npm test -- --coverage-report=lcov",
+    "cover:cli": "npm test -- --cov",
+    "cover:travis": "npm test -- --coverage-report=lcov --no-browser",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "eslint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dan-nl/internet-archive-metadata-api.git"
+  },
+  "keywords": [
+    "internet",
+    "archive",
+    "metadata api",
+    "api"
+  ],
+  "author": "dan entous",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dan-nl/internet-archive-metadata-api/issues"
+  },
+  "homepage": "https://github.com/dan-nl/internet-archive-metadata-api#readme",
+  "devDependencies": {
+    "coveralls": "2.11.14",
+    "eslint": "3.8.1",
+    "eslint-config-dan-nl": "git://github.com/dan-nl/eslint-config-dan-nl.git",
+    "sinon": "1.17.6",
+    "tap": "7.1.2"
+  },
+  "dependencies": {
+    "generic-request-options": "1.1.6",
+    "request-as-bluebird": "2.0.2"
+  }
+}
