@@ -14,20 +14,21 @@ var getQueryString = require( './get-query-string' );
  * @returns {Object}
  */
 module.exports = function getRequestOptions( user_options, request_headers ) {
-  var options = user_options || {};
+  var request_options;
 
-  var identifier = encodeURIComponent( options.identifier );
-  var index = encodeURIComponent( String( options.index ) );
-  var type = encodeURIComponent( options.type || 'all' );
+  user_options = user_options || {};
 
-  options.method = 'get';
+  var identifier = encodeURIComponent( user_options.identifier );
+  var index = encodeURIComponent( String( user_options.index ) );
+  var type = encodeURIComponent( user_options.type || 'all' );
 
-  options.url = getApiEndpoint( type )
+  request_options = getGenericRequestOptions( user_options, request_headers );
+  request_options.method = 'get';
+  request_options.qs = getQueryString( user_options );
+
+  request_options.url = getApiEndpoint( type )
     .replace( ':identifier', identifier )
     .replace( ':index', index );
 
-  options.qs = getQueryString( options );
-  options = getGenericRequestOptions( options, request_headers );
-
-  return options;
+  return request_options;
 };

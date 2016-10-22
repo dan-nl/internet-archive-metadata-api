@@ -9,14 +9,15 @@
  */
 function getQueryString( user_options ) {
   var query_string = {};
-  var options = user_options || {};
 
-  if ( typeof options.count === 'number' && !isNaN( options.count ) ) {
-    query_string.count = encodeURIComponent( String( options.count ) );
+  user_options = user_options || {};
+
+  if ( typeof user_options.count === 'number' && !isNaN( user_options.count ) ) {
+    query_string.count = encodeURIComponent( String( user_options.count ) );
   }
 
-  if ( typeof options.start === 'number' && !isNaN( options.start ) ) {
-    query_string.start = encodeURIComponent( String( options.start ) );
+  if ( typeof user_options.start === 'number' && !isNaN( user_options.start ) ) {
+    query_string.start = encodeURIComponent( String( user_options.start ) );
   }
 
   return query_string;
