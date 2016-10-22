@@ -16,15 +16,15 @@ var getQueryString = require( './get-query-string' );
 module.exports = function getRequestOptions( user_options, request_headers ) {
   var options = user_options || {};
 
-  var identifier = options.identifier;
-  var index = options.index;
-  var type = options.type || 'all';
+  var identifier = encodeURIComponent( options.identifier );
+  var index = encodeURIComponent( String( options.index ) );
+  var type = encodeURIComponent( options.type || 'all' );
 
-  options.method = options.method || 'get';
+  options.method = 'get';
 
   options.url = getApiEndpoint( type )
     .replace( ':identifier', identifier )
-    .replace( ':index', String( index ) );
+    .replace( ':index', index );
 
   options.qs = getQueryString( options );
   options = getGenericRequestOptions( options, request_headers );
