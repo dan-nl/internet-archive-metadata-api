@@ -118,4 +118,4 @@ read( user_options )
 [request-headers-url]: https://github.com/dan-nl/generic-request-options#request_headers
 [travis-image]: https://travis-ci.org/dan-nl/internet-archive-metadata-api.svg?branch=master
 [travis-url]: https://travis-ci.org/dan-nl/internet-archive-metadata-api
-[types]: https://raw.githubusercontent.com/dan-nl/internet-archive-metadata-api/master/src/helpers/get-api-enpoint.js
+[types]: https://raw.githubusercontent.com/dan-nl/internet-archive-metadata-api/master/src/helpers/get-api-endpoint.js
