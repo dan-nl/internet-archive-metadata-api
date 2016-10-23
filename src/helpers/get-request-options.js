@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: off */
+
 'use strict';
 
 /**
@@ -15,12 +17,15 @@ var getQueryString = require( './get-query-string' );
  */
 module.exports = function getRequestOptions( user_options, request_headers ) {
   var request_options;
+  var identifier;
+  var index;
+  var type;
 
   user_options = user_options || {};
 
-  var identifier = encodeURIComponent( user_options.identifier );
-  var index = encodeURIComponent( String( user_options.index ) );
-  var type = encodeURIComponent( user_options.type || 'all' );
+  identifier = encodeURIComponent( user_options.identifier );
+  index = encodeURIComponent( String( user_options.index ) );
+  type = encodeURIComponent( user_options.type || 'all' );
 
   request_options = getGenericRequestOptions( user_options, request_headers );
   request_options.method = 'get';

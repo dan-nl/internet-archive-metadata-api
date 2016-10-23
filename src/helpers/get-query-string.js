@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: off */
+
 'use strict';
 
 /**
