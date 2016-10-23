@@ -150,7 +150,7 @@ determines which internet archive resource will be affected by the write.
 the updates you want to apply to the internet archive item indicated by the `identifier`. they should be a string containing an array of valid [json patches](https://tools.ietf.org/html/draft-ietf-appsawg-json-patch-02). for example:
 
 ```javascript
-patch: '[ { "add": "/identifier", "value": "test-api" }, { "add": "/publisher", "value": "test-api" } ]'
+patch: '[ { "add": "/description", "value": "Testing the limits ..." }, { "add": "/publisher", "value": "Philadelphia P. Blakiston" } ]'
 ```
 
 ##### secret ( required )
@@ -189,7 +189,7 @@ var write = require( 'internet-archive-metadata-api' ).write;
 var user_options = {
   access: '<your-ia-s3-access-token>',
   identifier: 'test-api',
-  patch: '[ { "add": "/identifier", "value": "test-api" } ]',
+  patch: '[ { "add": "/publisher", "value": "Philadelphia P. Blakiston" } ]',
   secret: '<your-ia-s3-secret>',
   target: 'metadata'
 };
