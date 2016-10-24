@@ -14,8 +14,6 @@ var postRequestOptions = require( './helpers/post-request-options' );
  * @returns {Promise.<{ body:string, response:IncomingMessage }>}
  */
 function write( user_options, request_options, debug ) {
-  console.log( postRequestOptions( user_options, request_options ) );
-
   return request( postRequestOptions( user_options, request_options ), debug );
 }
 
