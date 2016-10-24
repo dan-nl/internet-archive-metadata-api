@@ -17,6 +17,7 @@ the methods in this module have been created based on the [The Internet Archive 
             * [type](#type--optional-)
         * [request-headers ( get/post )](#request_headers--getpost-)
         * [api-endpoints](#api-endpoints)
+        * [basic](#basic--getrequestoptions-)
     * [read( user_options, request_headers )](#read-user_options-request_headers-)
         * [user_options ( read )](#user_options--read-)
         * [request-headers ( read )](#request_headers--read-)
@@ -29,6 +30,7 @@ the methods in this module have been created based on the [The Internet Archive 
             * [secret](#secret--required-)
             * [target](#target--required-)
         * [request-headers ( write )](#request_headers--write-)
+        * [basic](#basic--postrequestoptions-)
     * [write( user_options, request_headers )](#write-user_options-request_headers-)
         * [user_options](#user_options--write-)
         * [request-headers](#request_headers--write-)
@@ -47,7 +49,7 @@ this module provides two main methods: [`read`](#read-user_options-request_heade
 ```javascript
  * @param {Object} [user_options]
  * @param {Object} [request_options]
- * @returns {Promise.<{ body:string, response:IncomingMessage }>}
+ * @returns {Object}
 ```
 
 #### user_options ( get )
@@ -84,12 +86,28 @@ api-endpoints available can be found in the [get-api-endpoint.js][types] file an
 
 the colon prefixed terms in the api endpoint urls are replaced with matching user_options properties; e.g. `:identifier`, and `:index` would be replaced with values indicated in the `user_options` object.
 
+#### basic ( getRequestOptions )
 ```javascript
+var getRequestOptions = require( 'internet-archive-metadata-api' ).getRequestOptions;
+
 var user_options = {
   identifier: 'frenchenglishmed00gorduoft',
-  index: 0,
-  type: 'files_index'
+  index: 1,
+  type: 'collection_index'
 };
+
+var request_options = getRequestOptions( user_options );
+
+request_options => {
+  identifier: 'frenchenglishmed00gorduoft',
+  index: 1,
+  type: 'collection_index',
+  headers: { 'user-agent': 'node.js/v4.6.0 request (https://www.npmjs.com/package/request)' },
+  timeout: 10000,
+  method: 'get',
+  qs: {},
+  url: 'https://archive.org/metadata/frenchenglishmed00gorduoft/metadata/collection/1' 
+}
 ```
 
 ### read( [user_options][, request_headers] )
@@ -126,7 +144,7 @@ read( user_options )
 ```javascript
  * @param {Object} [user_options]
  * @param {Object} [request_options]
- * @returns {Promise.<{ body:string, response:IncomingMessage }>}
+ * @returns {Object}
 ```
 
 #### user_options ( post )
@@ -147,7 +165,7 @@ your ia-s3 access key, which can be obtained by logging into your internet archi
 determines which internet archive resource will be affected by the write.
 
 ##### patch ( required )
-the updates you want to apply to the internet archive item indicated by the `identifier`. they should be a string containing an array of valid [json patches](https://tools.ietf.org/html/draft-ietf-appsawg-json-patch-02). for example:
+the updates you want to apply to the internet archive item indicated by the `identifier`. they should be a string containing an array of valid [json patches 02](https://tools.ietf.org/html/draft-ietf-appsawg-json-patch-02). for example:
 
 ```javascript
 patch: '[ { "add": "/description", "value": "Testing the limits ..." }, { "add": "/publisher", "value": "Philadelphia P. Blakiston" } ]'
@@ -168,6 +186,34 @@ one of the following values:
         * target the `frenchenglishmed00gorduoft_marc.xml` file by setting the target to `files/frenchenglishmed00gorduoft_marc.xml`
 * other
     * targets the other object for the item, which can be viewed at `http://archive.org/metadata/:identifier/other`; e.g., [http://archive.org/metadata/frenchenglishmed00gorduoft/other](http://archive.org/metadata/frenchenglishmed00gorduoft/other)
+
+#### basic ( postRequestOptions )
+```javascript
+var postRequestOptions = require( 'internet-archive-metadata-api' ).postRequestOptions;
+
+var user_options = {
+  access: 's3-access-token',
+  identifier: 'test-api',
+  patch: '[ { "add": "/description", "value": "Testing the limits ..." }, { "add": "/publisher", "value": "Philadelphia P. Blakiston" } ]',
+  secret: 's3-secret',
+  target: 'metadata'
+};
+
+var request_options = postRequestOptions( user_options );
+
+request_options => {
+  headers: { 'user-agent': 'node.js/v4.6.0 request (https://www.npmjs.com/package/request)' },
+  form: {
+    access: 's3-access-token',
+    '-patch': '%5B%20%7B%20%22add%22%3A%20%22%2Fdescription%22%2C%20%22value%22%3A%20%22Testing%20the%20limits%20...%22%20%7D%2C%20%7B%20%22add%22%3A%20%22%2Fpublisher%22%2C%20%22value%22%3A%20%22Philadelphia%20P.%20Blakiston%22%20%7D%20%5D',
+    secret: 's3-secret',
+    '-target': 'metadata'
+  },
+  method: 'post',
+  timeout: 10000,
+  url: 'https://archive.org/metadata/test-api'
+}
+```
 
 ### write( [user_options][, request_headers] )
 ```javascript
