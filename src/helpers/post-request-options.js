@@ -6,7 +6,7 @@
  * module dependencies
  */
 var getGenericRequestOptions = require( 'generic-request-options' );
-var postData = require( './post-data' );
+var postData = require( './get-post-data' );
 
 /**
  * @param {Object} [user_options]

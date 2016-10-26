@@ -39,7 +39,7 @@ test( 'postRequestOptions( user_options )', function ( t ) {
 
   var expected = {
     form: {
-      '-patch': '%5B%20%7B%20%22add%22%3A%20%22%2Fdescription%22%2C%20%22value%22%3A%20%22Testing%20the%20limits%20...%22%20%7D%2C%20%7B%20%22add%22%3A%20%22%2Fpublisher%22%2C%20%22value%22%3A%20%22Philadelphia%20P.%20Blakiston%22%20%7D%20%5D',
+      '-patch': '[ { "add": "/description", "value": "Testing the limits ..." }, { "add": "/publisher", "value": "Philadelphia P. Blakiston" } ]',
       '-target': 'metadata',
       access: 's3-access-token',
       secret: 's3-secret'

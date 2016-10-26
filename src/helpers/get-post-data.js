@@ -17,16 +17,16 @@ function postData( user_options ) {
   user_options = user_options || {};
 
   if ( user_options.access ) {
-    post_data.access = encodeURIComponent( user_options.access );
+    post_data.access = user_options.access;
   }
 
   // @link https://tools.ietf.org/html/draft-ietf-appsawg-json-patch-02
   if ( user_options.patch ) {
-    post_data[ '-patch' ] = encodeURIComponent( user_options.patch );
+    post_data[ '-patch' ] = user_options.patch;
   }
 
   if ( user_options.secret ) {
-    post_data.secret = encodeURIComponent( user_options.secret );
+    post_data.secret = user_options.secret;
   }
 
   if ( user_options.target ) {

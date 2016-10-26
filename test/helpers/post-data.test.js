@@ -5,13 +5,14 @@
 /**
  * module dependencies
  */
-var postData = require( '../../src/helpers/post-data' );
+var postData = require( '../../src/helpers/get-post-data' );
 var test = require( 'tap' ).test;
 
 test( 'postData()', function ( t ) {
   var post_data = postData();
 
   t.same( post_data, {}, 'post_data = {}' );
+
   t.end();
 } );
 
@@ -23,6 +24,7 @@ test( 'postData( { access: \'s3-access\' } )', function ( t ) {
   var post_data = postData( user_options );
 
   t.same( post_data, user_options, 'post_data = { access: \'s3-access\' }' );
+
   t.end();
 } );
 
@@ -32,12 +34,13 @@ test( 'postData( { patch: [ { "add": "/identifier", "value": "test-api" } ] } )'
   };
 
   var expected = {
-    '-patch': '%5B%20%7B%20%22add%22%3A%20%22%2Fidentifier%22%2C%20%22value%22%3A%20%22test-api%22%20%7D%20%5D'
+    '-patch': '[ { "add": "/identifier", "value": "test-api" } ]'
   };
 
   var post_data = postData( user_options );
 
   t.same( post_data, expected, 'post_data should be the same as the expected object' );
+
   t.end();
 } );
 
@@ -49,6 +52,7 @@ test( 'postData( { secret: \'s3-secret\' } )', function ( t ) {
   var post_data = postData( user_options );
 
   t.same( post_data, user_options, 'post_data = { secret: \'s3-secret\' }' );
+
   t.end();
 } );
 
@@ -64,6 +68,7 @@ test( 'postData( { target: \'metadata\' } )', function ( t ) {
   var post_data = postData( user_options );
 
   t.same( post_data, expected, 'post_data = { \'-target\': \'metadata\' }' );
+
   t.end();
 } );
 
@@ -76,7 +81,7 @@ test( 'postData( user_options )', function ( t ) {
   };
 
   var expected = {
-    '-patch': '%5B%20%7B%20%22add%22%3A%20%22%2Fidentifier%22%2C%20%22value%22%3A%20%22test-api%22%20%7D%20%5D',
+    '-patch': '[ { "add": "/identifier", "value": "test-api" } ]',
     '-target': 'metadata',
     access: 's3-access',
     secret: 's3-secret'
@@ -85,6 +90,7 @@ test( 'postData( user_options )', function ( t ) {
   var post_data = postData( user_options );
 
   t.same( post_data, expected, 'post_data should be the same as the expected object' );
+
   t.end();
 } );
 
@@ -96,5 +102,6 @@ test( 'postData( { unhandled: \'variable\' } )', function ( t ) {
   var post_data = postData( user_options );
 
   t.same( post_data, {}, 'post_data should not include unhandled properties' );
+
   t.end();
 } );
