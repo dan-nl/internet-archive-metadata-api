@@ -14,6 +14,7 @@ test( 'postRequestOptions()', function ( t ) {
   var expected = {
     form: {},
     headers: {
+      'date': new Date().toUTCString(),
       'user-agent': 'node.js/%node request (https://www.npmjs.com/package/request)'
         .replace( '%node', process.version )
     },
@@ -45,6 +46,7 @@ test( 'postRequestOptions( user_options )', function ( t ) {
       secret: 's3-secret'
     },
     headers: {
+      'date': new Date().toUTCString(),
       'user-agent': 'node.js/%node request (https://www.npmjs.com/package/request)'
         .replace( '%node', process.version )
     },
