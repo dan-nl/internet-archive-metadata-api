@@ -1,4 +1,4 @@
 .nyc_output
-/config/development.js
+config/development.js
 coverage
 node_modules
